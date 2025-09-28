@@ -36,7 +36,8 @@ const { setContext } = require("@/middlewares/setContext");
 // Middleware
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "https://tru-yen-moi.app"],
+
     credentials: true,
   })
 );
@@ -62,7 +63,7 @@ app.set("views", "./src/views");
 app.set("layout", "./layouts/default");
 
 // Router
-app.use("/api/v1", setContext, router);
+app.use("/api/v1", checkAuth, setContext, router);
 
 // ErrorHandle
 app.use(notFoundHandler);
